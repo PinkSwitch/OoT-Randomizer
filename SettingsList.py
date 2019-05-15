@@ -1,7 +1,7 @@
 import argparse
 import re
 import math
-from Cosmetics import get_tunic_color_options, get_navi_color_options, get_sword_color_options, get_gauntlet_color_options, get_magic_color_options, get_heart_color_options
+from Cosmetics import get_tunic_color_options, get_navi_color_options, get_rupee_color_options, get_sword_color_options, get_gauntlet_color_options, get_magic_color_options, get_heart_color_options
 from Location import LocationIterator
 import Sounds as sfx
 
@@ -1945,6 +1945,204 @@ setting_infos = [
             '''
         },
     ),
+    Setting_Info('rupee_green_color', str, 0, False,
+        {
+            'default': 'Green',
+            'type': parse_custom_rupee_color,
+            'help': '''\
+                    Choose the color for Silver Rupees. (default: %(default)s)
+                    Color:             Make the Rupee this color.
+                    Random Choice:     Choose a random color from this list of colors.
+                    Random Original:   Choose a random color from the game's original colors.
+                    Random Rupee-like: Choose a random color that looks rupee-like.
+                    Random Single:     Choose a single random color from any color the N64 can draw.
+                    Completely Random: Choose any combination of colors from any color the N64 can draw.
+                    '''
+        },
+        {
+            'text': '1 Rupee Color',
+            'group': 'rupee_colors',
+            'widget': 'Combobox',
+            'default': 'Green',
+            'options': get_rupee_color_options(),
+            'tooltip':'''\
+                      'Random Choice': Choose a random
+                      color from this list of colors.
+                      'Random Original': Choose a random
+                      color the game's original colors.
+                      'Random Rupee-like': Choose a random
+                      color that looks rupee-like.
+                      'Random Single': Choose a single random
+                      color from any color the N64 can draw.
+                      'Completely Random': Choose any combination
+                      of colors from any color the N64 can draw.
+                      '''
+        }),
+    Setting_Info('rupee_blue_color', str, 0, False,
+        {
+            'default': 'Blue',
+            'type': parse_custom_rupee_color,
+            'help': '''\
+                    Choose the color for Silver Rupees. (default: %(default)s)
+                    Color:             Make the Rupee this color.
+                    Random Choice:     Choose a random color from this list of colors.
+                    Random Original:   Choose a random color from the game's original colors.
+                    Random Rupee-like: Choose a random color that looks rupee-like.
+                    Random Single:     Choose a single random color from any color the N64 can draw.
+                    Completely Random: Choose any combination of colors from any color the N64 can draw.
+                    '''
+        },
+        {
+            'text': '5 Rupee Color',
+            'group': 'rupee_colors',
+            'widget': 'Combobox',
+            'default': 'Blue',
+            'options': get_rupee_color_options(),
+            'tooltip':'''\
+                      'Random Choice': Choose a random
+                      color from this list of colors.
+                      'Random Original': Choose a random
+                      color the game's original colors.
+                      'Random Rupee-like': Choose a random
+                      color that looks rupee-like.
+                      'Random Single': Choose a single random
+                      color from any color the N64 can draw.
+                      'Completely Random': Choose any combination
+                      of colors from any color the N64 can draw.
+                      '''
+        }),
+    Setting_Info('rupee_red_color', str, 0, False,
+        {
+            'default': 'Red',
+            'type': parse_custom_rupee_color,
+            'help': '''\
+                    Choose the color for Silver Rupees. (default: %(default)s)
+                    Color:             Make the Rupee this color.
+                    Random Choice:     Choose a random color from this list of colors.
+                    Random Original:   Choose a random color from the game's original colors.
+                    Random Rupee-like: Choose a random color that looks rupee-like.
+                    Random Single:     Choose a single random color from any color the N64 can draw.
+                    Completely Random: Choose any combination of colors from any color the N64 can draw.
+                    '''
+        },
+        {
+            'text': '20 Rupee Color',
+            'group': 'rupee_colors',
+            'widget': 'Combobox',
+            'default': 'Red',
+            'options': get_rupee_color_options(),
+            'tooltip':'''\
+                      'Random Choice': Choose a random
+                      color from this list of colors.
+                      'Random Original': Choose a random
+                      color the game's original colors.
+                      'Random Rupee-like': Choose a random
+                      color that looks rupee-like.
+                      'Random Single': Choose a single random
+                      color from any color the N64 can draw.
+                      'Completely Random': Choose any combination
+                      of colors from any color the N64 can draw.
+                      '''
+        }),
+    Setting_Info('rupee_purple_color', str, 0, False,
+        {
+            'default': 'Purple',
+            'type': parse_custom_rupee_color,
+            'help': '''\
+                    Choose the color for Silver Rupees. (default: %(default)s)
+                    Color:             Make the Rupee this color.
+                    Random Choice:     Choose a random color from this list of colors.
+                    Random Original:   Choose a random color from the game's original colors.
+                    Random Rupee-like: Choose a random color that looks rupee-like.
+                    Random Single:     Choose a single random color from any color the N64 can draw.
+                    Completely Random: Choose any combination of colors from any color the N64 can draw.
+                    '''
+        },
+        {
+            'text': '50 Rupee Color',
+            'group': 'rupee_colors',
+            'widget': 'Combobox',
+            'default': 'Purple',
+            'options': get_rupee_color_options(),
+            'tooltip':'''\
+                      'Random Choice': Choose a random
+                      color from this list of colors.
+                      'Random Original': Choose a random
+                      color the game's original colors.
+                      'Random Rupee-like': Choose a random
+                      color that looks rupee-like.
+                      'Random Single': Choose a single random
+                      color from any color the N64 can draw.
+                      'Completely Random': Choose any combination
+                      of colors from any color the N64 can draw.
+                      '''
+        }),
+    Setting_Info('rupee_gold_color', str, 0, False,
+        {
+            'default': 'Gold',
+            'type': parse_custom_rupee_color,
+            'help': '''\
+                    Choose the color for Silver Rupees. (default: %(default)s)
+                    Color:             Make the Rupee this color.
+                    Random Choice:     Choose a random color from this list of colors.
+                    Random Original:   Choose a random color from the game's original colors.
+                    Random Rupee-like: Choose a random color that looks rupee-like.
+                    Random Single:     Choose a single random color from any color the N64 can draw.
+                    Completely Random: Choose any combination of colors from any color the N64 can draw.
+                    '''
+        },
+        {
+            'text': '200 Rupee Color',
+            'group': 'rupee_colors',
+            'widget': 'Combobox',
+            'default': 'Gold',
+            'options': get_rupee_color_options(),
+            'tooltip':'''\
+                      'Random Choice': Choose a random
+                      color from this list of colors.
+                      'Random Original': Choose a random
+                      color the game's original colors.
+                      'Random Rupee-like': Choose a random
+                      color that looks rupee-like.
+                      'Random Single': Choose a single random
+                      color from any color the N64 can draw.
+                      'Completely Random': Choose any combination
+                      of colors from any color the N64 can draw.
+                      '''
+        }),
+    Setting_Info('rupee_silver_color', str, 0, False,
+        {
+            'default': 'Silver',
+            'type': parse_custom_rupee_color,
+            'help': '''\
+                    Choose the color for Silver Rupees. (default: %(default)s)
+                    Color:             Make the Rupee this color.
+                    Random Choice:     Choose a random color from this list of colors.
+                    Random Original:   Choose a random color from the game's original colors.
+                    Random Rupee-like: Choose a random color that looks rupee-like.
+                    Random Single:     Choose a single random color from any color the N64 can draw.
+                    Completely Random: Choose any combination of colors from any color the N64 can draw.
+                    '''
+        },
+        {
+            'text': 'Silver Rupee Color',
+            'group': 'rupee_colors',
+            'widget': 'Combobox',
+            'default': 'Silver',
+            'options': get_rupee_color_options(),
+            'tooltip':'''\
+                      'Random Choice': Choose a random
+                      color from this list of colors.
+                      'Random Original': Choose a random
+                      color the game's original colors.
+                      'Random Rupee-like': Choose a random
+                      color that looks rupee-like.
+                      'Random Single': Choose a single random
+                      color from any color the N64 can draw.
+                      'Completely Random': Choose any combination
+                      of colors from any color the N64 can draw.
+                      '''
+        }),
     Combobox(
         name           = 'sword_trail_duration',
         choices        = {

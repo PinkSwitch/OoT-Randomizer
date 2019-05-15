@@ -5,6 +5,35 @@ import Sounds as sfx
 from collections import namedtuple
 Color = namedtuple('Color', '  R     G     B')
 
+#hsv(0-1, 0-1, 0-1) -> rgb(0-255, 0-255, 0-255)
+def hsv_to_rgb(h, s, v):
+    if s == 0.0: v*=255; return (int(v), int(v), int(v))
+    h %= 1
+    i = int(h*6.)
+    f = (h*6.)-i; p,q,t = int(255*(v*(1.-s))), int(255*(v*(1.-s*f))), int(255*(v*(1.-s*(1.-f)))); v*=255; i%=6
+    if i == 0: return (int(v),     t ,     p )
+    if i == 1: return (    q , int(v),     p )
+    if i == 2: return (    p , int(v),     t )
+    if i == 3: return (    p ,     q , int(v))
+    if i == 4: return (    t ,     p , int(v))
+    if i == 5: return (int(v),     p ,     q )
+
+#rgb(0-255, 0-255, 0-255) -> hsv(0-1, 0-1, 0-1)
+def rgb_to_hsv(r, g, b):
+    r, g, b = r/255.0, g/255.0, b/255.0
+    mx = max(r, g, b)
+    mn = min(r, g, b)
+    df = mx-mn
+    if   mx == mn: h = 0
+    elif mx == r:  h = ((1/6) * ((g-b)/df) +  1   ) % 1
+    elif mx == g:  h = ((1/6) * ((b-r)/df) + (1/3)) % 1
+    elif mx == b:  h = ((1/6) * ((r-g)/df) + (2/3)) % 1
+    if mx == 0:    s = 0
+    else:          s = df/mx
+    v = mx
+    return h, s, v
+
+
 tunic_colors = {
     "Custom Color":      Color(0x00, 0x00, 0x00),
     "Kokiri Green":      Color(0x1E, 0x69, 0x1B),
@@ -64,6 +93,47 @@ NaviColors = {          # Inner Core Color         Outer Glow Color
     "Phantom Zelda":     (Color(0x97, 0x7A, 0x6C), Color(0x6F, 0x46, 0x67)),
 }
 
+RupeeColors = {          # Inner Highlight Color    Inner Main Color         Outer Highlight Color    Outer Main Color
+    "Custom Color":      (Color(0x00, 0x00, 0x00), Color(0x00, 0x00, 0x00), Color(0x00, 0x00, 0x00), Color(0x00, 0x00, 0x00)),
+    "Green":             (Color(0xC8, 0xFF, 0x00), Color(0x00, 0x78, 0x00), Color(0xFF, 0xFF, 0xAA), Color(0x64, 0xFF, 0x00)),
+    "Blue":              (Color(0x00, 0xC8, 0xFF), Color(0x00, 0x00, 0x78), Color(0xAA, 0xFF, 0xFF), Color(0x00, 0x64, 0xFF)),
+    "Red":               (Color(0xFF, 0xC8, 0x00), Color(0x82, 0x00, 0x00), Color(0xFF, 0xFF, 0xAA), Color(0xFF, 0x00, 0x00)),
+    "Purple":            (Color(0xFF, 0x00, 0xFF), Color(0x64, 0x00, 0x64), Color(0xFF, 0xAA, 0xFF), Color(0x64, 0x00, 0x96)),
+    "Gold":              (Color(0xFF, 0xFF, 0xAA), Color(0x78, 0x5A, 0x00), Color(0xFF, 0xFF, 0xAA), Color(0xFF, 0xFF, 0x00)),
+    "Silver":            (Color._make(hsv_to_rgb(240/360, 0.2, 1)),), #Silver doesn't have a GI color, so we have to make one up
+    "Orange":            (Color._make(hsv_to_rgb( 30/360,   1, 1)),),
+    "Yellow":            (Color._make(hsv_to_rgb( 60/360,   1, 1)),),
+    "Turquoise":         (Color._make(hsv_to_rgb(150/360,   1, 1)),),
+    "Cyan":              (Color._make(hsv_to_rgb(180/360,   1, 1)),),
+    "Sky Blue":          (Color._make(hsv_to_rgb(210/360,   1, 1)),),
+    "Royal Purple":      (Color._make(hsv_to_rgb(270/360,   1, 1)),),
+    "Pink":              (Color._make(hsv_to_rgb(330/360,   1, 1)),),
+    "Crimson":           (Color._make(hsv_to_rgb(  0/360, 1, 0.5)),),
+    "Brown":             (Color._make(hsv_to_rgb( 30/360, 1, 0.5)),),
+    "Dark Yellow":       (Color._make(hsv_to_rgb( 60/360, 1, 0.5)),),
+    "Dark Green":        (Color._make(hsv_to_rgb(120/360, 1, 0.5)),),
+    "Teal":              (Color._make(hsv_to_rgb(180/360, 1, 0.5)),),
+    "Midnight Blue":     (Color._make(hsv_to_rgb(210/360, 1, 0.5)),),
+    "Dark Blue":         (Color._make(hsv_to_rgb(240/360, 1, 0.5)),),
+    "Indigo":            (Color._make(hsv_to_rgb(270/360, 1, 0.5)),),
+    "Dark Magenta":      (Color._make(hsv_to_rgb(300/360, 1, 0.5)),),
+    "Tyrian Purple":     (Color._make(hsv_to_rgb(330/360, 1, 0.5)),),
+    "White":             (Color._make(hsv_to_rgb(0, 0,    1)),),
+    "Black":             (Color._make(hsv_to_rgb(0, 0, 0.05)),),
+}
+
+# We pull these from the rom before replacing them. This allows us to perfectly swap to vanilla textures if they are picked.
+RupeeBaseTexes = {}
+
+# HSV values used when we need to procedurally generate a texture (without the H)
+# SV values divided by 100, of course
+RupeeGenBase = [
+    ( 95, 66), ( 61, 97), ( 0, 97), (10, 97),
+    ( 91, 69), ( 50, 94), (16, 97), (32, 97),
+    ( 85, 41), ( 74, 72), (57, 94), (60, 94),
+    (100, 25), (100, 38), (86, 69), (90, 66),
+]
+
 sword_colors = {        # Initial Color            Fade Color
     "Custom Color":      (Color(0x00, 0x00, 0x00), Color(0x00, 0x00, 0x00)),
     "Rainbow":           (Color(0x00, 0x00, 0x00), Color(0x00, 0x00, 0x00)),
@@ -115,7 +185,6 @@ magic_colors = {
     "White":             Color(0xFF, 0xFF, 0xFF),
 }
 
-
 def get_tunic_colors():
     return list(tunic_colors.keys())
 
@@ -131,7 +200,15 @@ def get_navi_colors():
 def get_navi_color_options():
     return ["Random Choice", "Completely Random"] + get_navi_colors()
 
-    
+
+def get_rupee_colors():
+    return list(RupeeColors.keys())
+
+
+def get_rupee_color_options():
+    return ["Random Choice", "Random Original", "Random Rupee-like", "Random Single", "Completely Random"] + get_rupee_colors()
+
+
 def get_sword_colors():
     return list(sword_colors.keys())
 
@@ -264,6 +341,111 @@ def patch_navi_colors(rom, settings, log, symbols):
             navi_option = 'Custom'
         if navi_action not in log.navi_colors:
             log.navi_colors[navi_action] = [dict(option=navi_option, color1=''.join(['{:02X}'.format(c) for c in list(colors[0])]), color2=''.join(['{:02X}'.format(c) for c in list(colors[1])]))]
+
+def generate_rupee_texture(hue, sat, light):
+    #sq = lambda x: 1 - (1-x**(1/light))**light
+    sq = lambda x: 0 if light < 0.01 else x**(1 / (light*light))
+    rgb = [hsv_to_rgb(hue, sv[0]/100 * sat, sq(sv[1]/100)) for sv in RupeeGenBase]
+    
+    #convert to rgb6a1, then to bytes
+    shorts = [
+        ((col[0]<<8) & 0xF800) |
+        ((col[1]<<3) & 0x07C0) |
+        ((col[2]>>2) & 0x003E) | 0x1 for col in rgb]
+    
+    bytes = [((short>>8) & 0xFF, short & 0xFF) for short in shorts]
+    
+    #flatten
+    return [b for t in bytes for b in t]
+    
+def patch_rupee_colors(rom, settings, log, symbols):
+    # patch rupee colors
+    rupees = [                                       #orig col,  inn ref  , inn main , out ref  , out main , pick tex
+        ('1 Rupee',      settings.rupee_green_color,  "Green",  [0x19144ac, 0x19144b4, 0x191454c, 0x1914554, 0x0f47e50]),
+        ('5 Rupee',      settings.rupee_blue_color,   "Blue",   [0x19144cc, 0x19144d4, 0x191456c, 0x1914574, 0x0f47e70]),
+        ('20 Rupee',     settings.rupee_red_color,    "Red",    [0x19144ec, 0x19144f4, 0x191458c, 0x1914594, 0x0f47e90]),
+        ('50 Rupee',     settings.rupee_purple_color, "Purple", [0x191450c, 0x1914514, 0x19145ac, 0x19145b4, 0x0f47eb0]),
+        ('200 Rupee',    settings.rupee_gold_color,   "Gold",   [0x191452c, 0x1914534, 0x19145cc, 0x19145d4, 0x0f47ed0]),
+        ('Silver Rupee', settings.rupee_silver_color, "Silver", [0        , 0        , 0        , 0        , 0x0f47ef0]),
+    ]
+    rupee_color_list = get_rupee_colors()
+    
+    # first, snag all the original textures from the rom
+    for rupee, rupee_option, orcol, addresses in rupees:
+        RupeeBaseTexes[orcol] = rom.read_bytes(addresses[4], 0x20)
+    
+    for rupee, rupee_option, orcol, addresses in rupees:
+        # handle random
+        
+        # grab the color from the list
+        while rupee_option == 'Random Choice':
+            rupee_option = random.choice(rupee_color_list)
+        
+        if rupee_option == 'Random Original':
+            rupee_option = random.choice(list(RupeeBaseTexes.keys()))
+        
+        #if not changing, don't do anything
+        if rupee_option == orcol:
+            color = list(RupeeColors[rupee_option])
+        else:
+            # random single rupee-like color
+            if rupee_option == 'Random Rupee-like':
+                color = [list(hsv_to_rgb(random.random(), 1, 1))]
+            # completely random single color
+            elif rupee_option == 'Random Single':
+                color = [[random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)]]
+            
+            # completely random set of 4 colors
+            elif rupee_option == 'Completely Random':
+                color = [
+                    [random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)],
+                    [random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)],
+                    [random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)],
+                    [random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)],
+                ]
+            
+            elif rupee_option in RupeeColors:
+                color = list(RupeeColors[rupee_option])
+            
+            # build color from hex code
+            else:
+                color = [list(int(rupee_option[i:i+2], 16) for i in (0, 2 ,4))]
+                rupee_option = 'Custom'
+            
+            # If we only have a single color, we need to derive the rest from that single color
+            # We work off the green rupee, which is (very approximately) represented by these colors:
+            # (75, 100, 100) (120, 100, 50) (60, 33, 100) (90, 100, 100)
+            # We treat 120 as the base color, which allows us to create this list:
+            # (-45, 1, 1) (0, 1, 0.5) (-60, 0.333, 1) (-30, 1, 1)
+            # Where the H is a hue offset, and S and V are multiplied
+            if len(color) == 1:
+                hsv = rgb_to_hsv(*color[0])
+                
+                # hopefully all these constants get optimized away, but this isn't hot code anyway
+                color = [
+                    hsv_to_rgb(hsv[0]-(3/24), hsv[1]      , hsv[2]    ),
+                    hsv_to_rgb(hsv[0]       , hsv[1]      , hsv[2]*0.5),
+                    hsv_to_rgb(hsv[0]-(1/6 ), hsv[1]*(1/3), hsv[2]    ),
+                    hsv_to_rgb(hsv[0]-(1/12), hsv[1]      , hsv[2]    ),
+                ]
+            
+            #silver doesn't have a getitem
+            if orcol != "Silver":
+                for i in range(0, 4):
+                    color[i] = [0 if p < 0 else 255 if p > 255 else int(p) for p in color[i]]
+                    rom.write_bytes(addresses[i], color[i])
+            
+            ruptex = None
+            if rupee_option in RupeeBaseTexes:
+                ruptex = RupeeBaseTexes[rupee_option]
+            else:
+                hsv = rgb_to_hsv(*color[1])
+                ruptex = generate_rupee_texture(hsv[0], hsv[1], hsv[2]*2)
+            
+            rom.write_bytes(addresses[4], ruptex)
+        
+        color = [''.join(['{:02X}'.format(p) for p in c]) for c in color]
+        log.rupee_colors[rupee] = dict(option=rupee_option, color1=color[0], color2=color[1], color3=color[2], color4=color[3])
 
 
 def patch_sword_trails(rom, settings, log, symbols):
@@ -460,6 +642,7 @@ global_patch_sets = [
     patch_tunic_colors,
     patch_navi_colors,
     patch_gauntlet_colors,
+    patch_rupee_colors,
     patch_sfx,
     patch_instrument,    
 ]
@@ -656,6 +839,7 @@ class CosmeticsLog(object):
         self.settings = settings
         self.tunic_colors = {}
         self.navi_colors = {}
+        self.rupee_colors = {}
         self.sword_colors = {}
         self.gauntlet_colors = {}
         self.heart_colors = {}
@@ -695,6 +879,10 @@ class CosmeticsLog(object):
             for i, options in enumerate(list):
                 color_option_string = '{option} (#{color1}, #{color2})'
                 output += format_string.format(key=(navi_action+':') if i == 0 else '', value=color_option_string.format(option=options['option'], color1=options['color1'], color2=options['color2']), width=padding)
+
+        for rupee_color, options in self.rupee_colors.items():
+            color_option_string = '{option} (#{color1}, #{color2}, #{color3}, #{color4})'
+            output += format_string.format(key=(rupee_color+':') if i == 0 else '', value=color_option_string.format(option=options['option'], color1=options['color1'], color2=options['color2'], color3=options['color3'], color4=options['color4']), width=padding)
 
         if 'sword_colors' in self.__dict__:
             for sword_trail, list in self.sword_colors.items():
