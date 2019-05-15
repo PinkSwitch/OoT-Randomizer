@@ -206,7 +206,8 @@ def get_rupee_colors():
 
 
 def get_rupee_color_options():
-    return ["Random Choice", "Random Original", "Random Rupee-like", "Random Single", "Completely Random"] + get_rupee_colors()
+    # leaving out "Completely Random"; it doesn't work very well since the effect only appears on getitems
+    return ["Random Choice", "Random Original", "Random Rupee-like", "Random Single"] + get_rupee_colors() 
 
 
 def get_sword_colors():

@@ -1956,7 +1956,6 @@ setting_infos = [
                     Random Original:   Choose a random color from the game's original colors.
                     Random Rupee-like: Choose a random color that looks rupee-like.
                     Random Single:     Choose a single random color from any color the N64 can draw.
-                    Completely Random: Choose any combination of colors from any color the N64 can draw.
                     '''
         },
         {
@@ -1974,8 +1973,6 @@ setting_infos = [
                       color that looks rupee-like.
                       'Random Single': Choose a single random
                       color from any color the N64 can draw.
-                      'Completely Random': Choose any combination
-                      of colors from any color the N64 can draw.
                       '''
         }),
     Setting_Info('rupee_blue_color', str, 0, False,
@@ -1989,7 +1986,6 @@ setting_infos = [
                     Random Original:   Choose a random color from the game's original colors.
                     Random Rupee-like: Choose a random color that looks rupee-like.
                     Random Single:     Choose a single random color from any color the N64 can draw.
-                    Completely Random: Choose any combination of colors from any color the N64 can draw.
                     '''
         },
         {
@@ -2007,8 +2003,6 @@ setting_infos = [
                       color that looks rupee-like.
                       'Random Single': Choose a single random
                       color from any color the N64 can draw.
-                      'Completely Random': Choose any combination
-                      of colors from any color the N64 can draw.
                       '''
         }),
     Setting_Info('rupee_red_color', str, 0, False,
@@ -2022,7 +2016,6 @@ setting_infos = [
                     Random Original:   Choose a random color from the game's original colors.
                     Random Rupee-like: Choose a random color that looks rupee-like.
                     Random Single:     Choose a single random color from any color the N64 can draw.
-                    Completely Random: Choose any combination of colors from any color the N64 can draw.
                     '''
         },
         {
@@ -2040,8 +2033,6 @@ setting_infos = [
                       color that looks rupee-like.
                       'Random Single': Choose a single random
                       color from any color the N64 can draw.
-                      'Completely Random': Choose any combination
-                      of colors from any color the N64 can draw.
                       '''
         }),
     Setting_Info('rupee_purple_color', str, 0, False,
@@ -2055,7 +2046,6 @@ setting_infos = [
                     Random Original:   Choose a random color from the game's original colors.
                     Random Rupee-like: Choose a random color that looks rupee-like.
                     Random Single:     Choose a single random color from any color the N64 can draw.
-                    Completely Random: Choose any combination of colors from any color the N64 can draw.
                     '''
         },
         {
@@ -2073,8 +2063,6 @@ setting_infos = [
                       color that looks rupee-like.
                       'Random Single': Choose a single random
                       color from any color the N64 can draw.
-                      'Completely Random': Choose any combination
-                      of colors from any color the N64 can draw.
                       '''
         }),
     Setting_Info('rupee_gold_color', str, 0, False,
@@ -2088,7 +2076,6 @@ setting_infos = [
                     Random Original:   Choose a random color from the game's original colors.
                     Random Rupee-like: Choose a random color that looks rupee-like.
                     Random Single:     Choose a single random color from any color the N64 can draw.
-                    Completely Random: Choose any combination of colors from any color the N64 can draw.
                     '''
         },
         {
@@ -2106,8 +2093,6 @@ setting_infos = [
                       color that looks rupee-like.
                       'Random Single': Choose a single random
                       color from any color the N64 can draw.
-                      'Completely Random': Choose any combination
-                      of colors from any color the N64 can draw.
                       '''
         }),
     Setting_Info('rupee_silver_color', str, 0, False,
@@ -2121,7 +2106,6 @@ setting_infos = [
                     Random Original:   Choose a random color from the game's original colors.
                     Random Rupee-like: Choose a random color that looks rupee-like.
                     Random Single:     Choose a single random color from any color the N64 can draw.
-                    Completely Random: Choose any combination of colors from any color the N64 can draw.
                     '''
         },
         {
@@ -2139,8 +2123,6 @@ setting_infos = [
                       color that looks rupee-like.
                       'Random Single': Choose a single random
                       color from any color the N64 can draw.
-                      'Completely Random': Choose any combination
-                      of colors from any color the N64 can draw.
                       '''
         }),
     Combobox(
