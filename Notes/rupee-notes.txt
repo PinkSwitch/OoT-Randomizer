@@ -1,0 +1,38 @@
+//addresses refer to decompresed 1.0 NTSC
+//located in gameplay_keep, which starts at 0x00f03000
+0x0f47e50 + 32 - rgb5a1 Texture for Green Rupee pickup
+0x0f47e70 + 32 - rgb5a1 Texture for Blue Rupee pickup
+0x0f47e90 + 32 - rgb5a1 Texture for Red Rupee pickup
+0x0f47eb0 + 32 - rgb5a1 Texture for Purple Rupee pickup
+0x0f47ed0 + 32 - rgb5a1 Texture for Gold Rupee pickup
+0x0f47ef0 + 32 - rgb5a1 Texture for Silver Rupee pickup
+
+//located in object_gi_rupy, which starts at 0x01914000
+0x19144a0 + 320 - Rupee GI color display lists
+
+0x19144ac + 4 - Green Rupee Inner Self Color 
+0x19144b4 + 4 - Green Rupee Inner Env Color
+0x19144cc + 4 - Blue Rupee Inner Self Color 
+0x19144d4 + 4 - Blue Rupee Inner Env Color
+0x19144ec + 4 - Red Rupee Inner Self Color 
+0x19144f4 + 4 - Red Rupee Inner Env Color
+0x191450c + 4 - Purple Rupee Inner Self Color 
+0x1914514 + 4 - Purple Rupee Inner Env Color
+0x191452c + 4 - Huge Rupee Inner Self Color 
+0x1914534 + 4 - Huge Rupee Inner Env Color
+0x191454c + 4 - Green Rupee Outer Self Color 
+0x1914554 + 4 - Green Rupee Outer Env Color
+0x191456c + 4 - Blue Rupee Outer Self Color 
+0x1914574 + 4 - Blue Rupee Outer Env Color
+0x191458c + 4 - Red Rupee Outer Self Color 
+0x1914594 + 4 - Red Rupee Outer Env Color
+0x19145ac + 4 - Purple Rupee Outer Self Color 
+0x19145b4 + 4 - Purple Rupee Outer Env Color
+0x19145cc + 4 - Huge Rupee Outer Self Color 
+0x19145d4 + 4 - Huge Rupee Outer Env Color
+
+0x19144ac, 0x19144b4, 0x191454c, 0x1914554
+0x19144cc, 0x19144d4, 0x191456c, 0x1914574
+0x19144ec, 0x19144f4, 0x191458c, 0x1914594
+0x191450c, 0x1914514, 0x19145ac, 0x19145b4
+0x191452c, 0x1914534, 0x19145cc, 0x19145d4
