@@ -388,6 +388,9 @@ def patch_rupee_colors(rom, settings, log, symbols):
         #if not changing, don't do anything
         if rupee_option == orcol:
             color = list(RupeeColors[rupee_option])
+            if len(color) == 1:
+                zero = [0, 0, 0]
+                color = [zero, color[0], zero, zero]
         else:
             # random single rupee-like color
             if rupee_option == 'Random Rupee-like':
