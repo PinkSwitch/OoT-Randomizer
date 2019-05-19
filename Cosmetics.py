@@ -429,7 +429,8 @@ def patch_rupee_colors(rom, settings, log, symbols):
                 color = [
                     hsv_to_rgb(hsv[0]-(3/24), hsv[1]      , hsv[2]    ),
                     hsv_to_rgb(hsv[0]       , hsv[1]      , hsv[2]*0.5),
-                    hsv_to_rgb(hsv[0]-(1/6 ), hsv[1]*(1/3), hsv[2]    ),
+                    #hsv_to_rgb(hsv[0]-(1/6 ), hsv[1]*(1/3), hsv[2]    ),
+                    [0xFF, 0xFF, 0xFF], # a little brutish, but fixes lighting problems
                     hsv_to_rgb(hsv[0]-(1/12), hsv[1]      , hsv[2]    ),
                 ]
             
