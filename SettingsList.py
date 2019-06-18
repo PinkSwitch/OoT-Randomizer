@@ -656,7 +656,7 @@ setting_infos = [
         gui_text       = 'Randomize All Settings',
         gui_group      = 'rules_tab',
         gui_tooltip    = '''\
-                         Randomizes most Main Rules.
+                         Except logic.
                          ''',
         default        = False,
         shared         = True,
