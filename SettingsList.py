@@ -555,7 +555,14 @@ logic_tricks = {
         'tooltip' : '''\
                     A precise jump can be used to reach this alcove.
                     '''},
-
+    'Pass Through Visible One-Way Collisions': {
+        'name'    : 'logic_visible_collisions',
+        'tooltip' : '''\
+                    Allows climbing through the platform to reach 
+                    Impa's House Back as adult with no items and 
+                    going through the Kakariko Village Gate as child
+                    when coming from the Mountain Trail side.
+                    '''},
 
 
 }
@@ -649,7 +656,7 @@ setting_infos = [
         gui_text       = 'Randomize All Settings',
         gui_group      = 'rules_tab',
         gui_tooltip    = '''\
-                         Except logic.
+                         Randomizes most Main Rules.
                          ''',
         default        = False,
         shared         = True,
@@ -704,12 +711,12 @@ setting_infos = [
         },
     ),
     Checkbutton(
-        name           = 'open_kak',
-        gui_text       = 'Open Kakariko Gate',
+        name           = 'open_fountain',
+        gui_text       = 'Open Zora\'s Fountain',
         gui_group      = 'open',
         gui_tooltip    = '''\
-            Kakariko Gate is open without needing
-            Zelda's Letter.
+            King Zora starts out as moved. This also removes
+            Ruto's Letter from the item pool.
         ''',
         shared         = True,
         gui_params     = {
@@ -717,12 +724,12 @@ setting_infos = [
         },
     ),
     Checkbutton(
-        name           = 'open_fountain',
-        gui_text       = 'Open Zora\'s Fountain',
+        name           = 'open_kak',
+        gui_text       = 'Open Kakariko Gate',
         gui_group      = 'open',
         gui_tooltip    = '''\
-            King Zora starts out as moved. This also removes
-            Ruto's Letter from the item pool.
+            Kakariko Gate is open without needing
+            Zelda's Letter.
         ''',
         shared         = True,
         gui_params     = {
@@ -1103,7 +1110,7 @@ setting_infos = [
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
-        },
+        },v
     ),
     Scale(
         name           = 'big_poe_count',
@@ -1913,6 +1920,12 @@ setting_infos = [
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
+            'distribution':  [
+                ('half',     1),
+                ('normal',     1),
+				('double', 1),
+				('quadruple',  1),
+            ],
         },
     ),
     Combobox(
