@@ -555,14 +555,7 @@ logic_tricks = {
         'tooltip' : '''\
                     A precise jump can be used to reach this alcove.
                     '''},
-    'Pass Through Visible One-Way Collisions': {
-        'name'    : 'logic_visible_collisions',
-        'tooltip' : '''\
-                    Allows climbing through the platform to reach 
-                    Impa's House Back as adult with no items and 
-                    going through the Kakariko Village Gate as child
-                    when coming from the Mountain Trail side.
-                    '''},
+
 
 
 }
@@ -653,10 +646,10 @@ setting_infos = [
     ),
     Checkbutton(
         name           = 'randomize_settings',
-        gui_text       = 'Randomize Main Rule Settings',
+        gui_text       = 'Randomize All Settings',
         gui_group      = 'rules_tab',
         gui_tooltip    = '''\
-                         Randomizes most Main Rules.
+                         Except logic.
                          ''',
         default        = False,
         shared         = True,
@@ -704,6 +697,19 @@ setting_infos = [
             play the Song of Time. If this is not set, only
             an Ocarina and Song of Time must be found to open
             the Door of Time.
+        ''',
+        shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
+    ),
+    Checkbutton(
+        name           = 'open_kak',
+        gui_text       = 'Open Kakariko Gate',
+        gui_group      = 'open',
+        gui_tooltip    = '''\
+            Kakariko Gate is open without needing
+            Zelda's Letter.
         ''',
         shared         = True,
         gui_params     = {
@@ -777,6 +783,7 @@ setting_infos = [
                 ('stones',     1),
                 ('medallions', 1),
                 ('dungeons',   1),
+				('tokens',     1),
             ],
         },
     ),
@@ -920,6 +927,21 @@ setting_infos = [
             Ganondorf and Ganon will be skipped.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
+    ),
+    Checkbutton(
+        name           = 'fast_dungeons',
+        gui_text       = 'Fast Dungeons',
+        gui_group      = 'convenience',
+        gui_tooltip    = '''\
+            Opens shortcuts in dungeons. 
+        ''',
+        shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'no_guard_stealth',
@@ -930,6 +952,9 @@ setting_infos = [
             straight to Zelda, skipping the guards.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'no_epona_race',
@@ -940,6 +965,9 @@ setting_infos = [
             without needing to race Ingo.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'useful_cutscenes',
@@ -951,6 +979,9 @@ setting_infos = [
             to Twinrova will not be skipped.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'fast_chests',
@@ -962,6 +993,9 @@ setting_infos = [
         ''',
         default        = True,
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'logic_no_night_tokens_without_suns_song',
@@ -974,6 +1008,9 @@ setting_infos = [
             to wait until night for some locations.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'free_scarecrow',
@@ -985,6 +1022,9 @@ setting_infos = [
             do so, without needing the song.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'start_with_fast_travel',
@@ -998,6 +1038,9 @@ setting_infos = [
             instead of Prelude and Serenade.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'start_with_rupees',
@@ -1007,6 +1050,9 @@ setting_infos = [
             Start the game with 99 rupees. Wallet upgrades fill wallet.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'start_with_wallet',
@@ -1016,6 +1062,9 @@ setting_infos = [
             Start the game with the largest wallet (999 max).
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'start_with_deku_equipment',
@@ -1027,6 +1076,9 @@ setting_infos = [
             unless playing with the Shopsanity setting.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
 	Checkbutton(
 		name           = 'fast_chickens',
@@ -1036,6 +1088,9 @@ setting_infos = [
             Moves all except the Chicken near the pen into the pen.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'big_poe_count_random',
@@ -1046,6 +1101,9 @@ setting_infos = [
             in a random number of Big Poes.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Scale(
         name           = 'big_poe_count',
@@ -1059,6 +1117,9 @@ setting_infos = [
         ''',
         dependency     = lambda settings: 1 if settings.big_poe_count_random else None,
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'shuffle_kokiri_sword',
@@ -1254,8 +1315,10 @@ setting_infos = [
         gui_params     = {
             'randomize_key': 'randomize_settings',
             'distribution':  [
-                ('off', 1),
-                ('low', 1),
+                ('off',     1),
+                ('low',     1),
+				('regular', 1),
+				('random',  1),
             ],
         },
     ),
@@ -1593,6 +1656,9 @@ setting_infos = [
             Select the earliest item that can appear in the adult trade sequence.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'logic_latest_adult_trade',
@@ -1614,6 +1680,9 @@ setting_infos = [
             Select the latest item that can appear in the adult trade sequence.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'logic_lens',
@@ -1635,6 +1704,9 @@ setting_infos = [
             the ghost guide across the Haunted Wasteland.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'ocarina_songs',
@@ -1647,6 +1719,9 @@ setting_infos = [
                          typically more difficult.
                          ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'correct_chest_sizes',
@@ -1661,6 +1736,9 @@ setting_infos = [
             ammo, and rupees, so doing so is a risk.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'clearer_hints',
@@ -1671,6 +1749,9 @@ setting_infos = [
             be very direct if this option is enabled.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'hints',
@@ -1699,6 +1780,9 @@ setting_infos = [
             required to beat the game.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'hint_dist',
@@ -1722,6 +1806,9 @@ setting_infos = [
             number of hints for each type.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'text_shuffle',
@@ -1744,6 +1831,9 @@ setting_infos = [
             text for the purpose of accurate price checks.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'junk_ice_traps',
@@ -1770,6 +1860,9 @@ setting_infos = [
             base pool.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'item_pool_value',
@@ -1796,6 +1889,9 @@ setting_infos = [
             'Minimal': Most excess items are removed.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'damage_multiplier',
@@ -1815,6 +1911,9 @@ setting_infos = [
             'OHKO': Link dies in one hit.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'starting_tod',
@@ -1843,6 +1942,9 @@ setting_infos = [
             The alternatives are multiples of 3 hours.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Combobox(
         name           = 'starting_age',
@@ -1864,6 +1966,9 @@ setting_infos = [
             Closed Forest.
         ''',
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
         dependency     = lambda settings: 'child' if settings.open_forest == 'closed' else None,
     ),
     Combobox(
