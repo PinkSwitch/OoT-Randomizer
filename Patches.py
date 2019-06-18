@@ -868,7 +868,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
 
     # Initial Save Data
 
-    if not world.useful_cutscenes:
+    if world.useful_cutscenes is False and world.fast_dungeons is False:
         save_context.write_bits(0x00D4 + 0x03 * 0x1C + 0x04 + 0x0, 0x08) # Forest Temple switch flag (Poe Sisters cutscene)
     save_context.write_bits(0x00D4 + 0x05 * 0x1C + 0x04 + 0x1, 0x01) # Water temple switch flag (Ruto)
     save_context.write_bits(0x00D4 + 0x51 * 0x1C + 0x04 + 0x2, 0x08) # Hyrule Field switch flag (Owl)
@@ -948,8 +948,21 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
         save_context.write_bits(0x0F2A, 0x40) # "Caught Cucco Near Skulltula House"
         save_context.write_bits(0x0F2A, 0x80) # "Caught Cucco Behind Potion Shop"
 
+	# Fast Dungeons
+    if world.fast_dungeons:
+         save_context.write_bits(0x00D9, 0x01) # Deku Basement Block Down; 1		
+         save_context.write_bits(0x00DB, 0x60) # Deku 1F Web Broken; 1, Deku Basement Web Broken; 3
+         save_context.write_bits(0x00F4, 0x04) # Dodongo's Cavern Mouth Opened
+         save_context.write_bits(0x0110, 0x20) # Jabu Jabu's Belly Platform Lowered
+         save_context.write_bits(0x0133, 0x04) # Forest Temple; Prevents Poes From Spawning in Main Room to Steal Fire; Allows all to Spawn Except Meg  
+         save_context.write_bits(0x014A, 0x40) # Fire Temple Pillar Dropped
+         save_context.write_bits(0x0181, 0x80) # Spirit Temple Elevator
+         save_context.write_bits(0x0183, 0x10) # Spirit Temple Statue Face
+         save_context.write_bits(0x019C, 0x20) # Shadow Temple Boat Shortcut opened
+
     # Make the Kakariko Gate not open with the MS
-    rom.write_int32(0xDD3538, 0x34190000) # li t9, 0
+    if world.open_kak is False:
+        rom.write_int32(0xDD3538, 0x34190000) # li t9, 0
 
     if world.open_fountain:
         save_context.write_bits(0x0EDB, 0x08) #Move king zora
