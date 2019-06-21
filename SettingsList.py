@@ -1110,7 +1110,7 @@ setting_infos = [
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
-        },v
+        },
     ),
     Scale(
         name           = 'big_poe_count',
