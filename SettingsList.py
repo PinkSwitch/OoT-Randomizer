@@ -1570,6 +1570,9 @@ setting_infos = [
         ''',
         dependency     = lambda settings: False if settings.logic_rules == 'glitched' else None,
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Scale(
         name           = 'mq_dungeons',
@@ -1594,6 +1597,9 @@ setting_infos = [
         dependency     = lambda settings: 0 if settings.mq_dungeons_random or settings.logic_rules == 'glitched' else None,
 
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Setting_Info(
         name           = 'disabled_locations', 
