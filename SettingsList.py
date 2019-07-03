@@ -1920,8 +1920,9 @@ setting_infos = [
             'distribution':  [
                 ('half',     1),
                 ('normal',     1),
-				('double', 1),
-				('quadruple',  1),
+		('double', 1),
+		('quadruple',  1),
+		('ohko', 1),   
             ],
         },
     ),
