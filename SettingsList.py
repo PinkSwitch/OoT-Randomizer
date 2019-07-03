@@ -1616,6 +1616,9 @@ setting_infos = [
         dependency     = lambda settings: 0 if settings.mq_dungeons_random or settings.logic_rules == 'glitched' else None,
 
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Setting_Info(
         name           = 'disabled_locations', 
@@ -1936,8 +1939,9 @@ setting_infos = [
             'distribution':  [
                 ('half',     1),
                 ('normal',     1),
-				('double', 1),
-				('quadruple',  1),
+		('double', 1),
+		('quadruple',  1),
+		('ohko', 1),
             ],
         },
     ),
